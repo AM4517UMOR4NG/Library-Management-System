@@ -1,4 +1,4 @@
-Foe using this project you must log in.
+For using this project you must log in.
 As a user and as an admin.
 As an admin, your username is "admin" and your passcode/password is "admin123".
 As a user, your username is "user" and your passcode/password is "user123"
