@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import com.example.library_management_utspbold.model.*;
 import com.example.library_management_utspbold.service.*;
 import java.util.Date;
+import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @SpringBootApplication
 public class LibraryManagementUtspboldApplication {
