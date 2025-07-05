@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Bean;
 import com.example.library_management_utspbold.model.*;
 import com.example.library_management_utspbold.service.*;
 import java.util.Date;
-import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 @SpringBootApplication
 public class LibraryManagementUtspboldApplication {
@@ -17,8 +15,11 @@ public class LibraryManagementUtspboldApplication {
     }
     
     @Bean
-    public CommandLineRunner demoData(BookService bookService, MemberService memberService, LoanTransactionService loanService) {
+    public CommandLineRunner demoData(BookService bookService, MemberService memberService, LoanTransactionService loanService, UserService userService) {
         return args -> {
+            // Seed default users first
+            userService.seedDefaultUsers();
+            
             // Add sample books
             Book book1 = new Book("Bersyukur Kepada TUHAN :)", "H. White. M", "978-0732883565");
             Book book2 = new Book("Footbal Manager", "M.Lion", "978-5654310789");

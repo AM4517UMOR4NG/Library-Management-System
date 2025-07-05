@@ -13,4 +13,9 @@ public class MainController {
     public String home() {
         return "index";
     }
+    
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/login?logout";
+    }
 }
