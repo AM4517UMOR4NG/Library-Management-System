@@ -26,11 +26,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        // Skip JWT filter for /api/auth/**
+        
+        // Skip JWT filter for non-API requests (Thymeleaf pages)
+        if (!path.startsWith("/api/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        
+        // Skip JWT filter for auth endpoints
         if (path.startsWith("/api/auth/")) {
             filterChain.doFilter(request, response);
             return;
         }
+        
         final String authHeader = request.getHeader("Authorization");
         String username = null;
         String jwt = null;

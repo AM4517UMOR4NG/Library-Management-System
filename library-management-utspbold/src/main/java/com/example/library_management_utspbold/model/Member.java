@@ -14,6 +14,8 @@ public class Member {
     private Long id;
     private String name;
     private String email;
+    private String phone;
+    private String address;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -28,6 +30,14 @@ public class Member {
     public Member(String name, String email, Date membershipDate){
         this.name = name;
         this.email = email;
+        this.membershipDate = membershipDate;
+    }
+
+    public Member(String name, String email, String phone, String address, Date membershipDate){
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
         this.membershipDate = membershipDate;
     }
 
@@ -53,6 +63,22 @@ public class Member {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Date getMembershipDate() {

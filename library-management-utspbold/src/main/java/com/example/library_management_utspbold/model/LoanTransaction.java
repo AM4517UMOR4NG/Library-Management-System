@@ -23,7 +23,11 @@ public class LoanTransaction {
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date borrowDate;
+    private Date loanDate;  // Changed from borrowDate
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dueDate;   // Added dueDate field
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -34,10 +38,11 @@ public class LoanTransaction {
     public LoanTransaction() {
     }
 
-    public LoanTransaction(Book book, Member member, Date borrowDate, Date returnDate) {
+    public LoanTransaction(Book book, Member member, Date loanDate, Date dueDate, Date returnDate) {
         this.book = book;
         this.member = member;
-        this.borrowDate = borrowDate;
+        this.loanDate = loanDate;
+        this.dueDate = dueDate;
         this.returnDate = returnDate;
         this.returned = false; // Buku belum dikembalikan secara default
     }
@@ -67,12 +72,20 @@ public class LoanTransaction {
         this.member = member;
     }
 
-    public Date getBorrowDate() {
-        return borrowDate;
+    public Date getLoanDate() {
+        return loanDate;
     }
 
-    public void setBorrowDate(Date borrowDate) {
-        this.borrowDate = borrowDate;
+    public void setLoanDate(Date loanDate) {
+        this.loanDate = loanDate;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 
     public Date getReturnDate() {
@@ -89,5 +102,14 @@ public class LoanTransaction {
 
     public void setReturned(boolean returned) {
         this.returned = returned;
+    }
+
+    // Backward compatibility methods
+    public Date getBorrowDate() {
+        return loanDate;
+    }
+
+    public void setBorrowDate(Date borrowDate) {
+        this.loanDate = borrowDate;
     }
 }

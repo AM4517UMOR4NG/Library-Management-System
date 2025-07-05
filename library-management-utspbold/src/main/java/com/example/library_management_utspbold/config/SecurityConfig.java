@@ -25,21 +25,30 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
-                // Allow public access to auth endpoints
+                // Public endpoints (no authentication required)
                 .requestMatchers("/api/auth/**").permitAll()
-                // API endpoints pakai JWT
-                .requestMatchers("/api/**").authenticated()
-                // Static resources dan public pages
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/h2-console/**").permitAll()
                 .requestMatchers("/", "/home", "/index", "/login", "/error").permitAll()
-                // Semua endpoint web (Thymeleaf) pakai session
+                // API endpoints require JWT authentication
+                .requestMatchers("/api/**").authenticated()
+                // Web endpoints (Thymeleaf) require session authentication
+                .requestMatchers("/books/**", "/members/**", "/loans/**").authenticated()
+                // Default fallback
                 .anyRequest().authenticated()
             )
-            // Hanya API yang stateless, web pakai session
+            .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+            )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
             .headers(headers -> headers.disable());
 
-        // Tambahkan JWT filter hanya untuk /api/**
+        // Add JWT filter only for API endpoints
         http.addFilterBefore(new JwtAuthenticationFilter(jwtUtil, userDetailsService), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

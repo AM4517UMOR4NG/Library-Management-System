@@ -8,19 +8,17 @@ import LandingPage from './views/LandingPage.vue'
 import LoginPage from './views/LoginPage.vue'
 import RegisterPage from './views/RegisterPage.vue'
 
-// Router configuration
-const routes = [
-  { path: '/', component: LandingPage },
-  { path: '/login', component: LoginPage },
-  { path: '/register', component: RegisterPage }
-]
-
+// Create router
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes: [
+    { path: '/', component: LandingPage },
+    { path: '/login', component: LoginPage },
+    { path: '/register', component: RegisterPage }
+  ]
 })
 
-// Create and mount app
+// Create app
 const app = createApp(App)
 app.use(router)
 app.mount('#app') 
