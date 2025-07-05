@@ -9,7 +9,7 @@
         <h1>Daftar Buku</h1>
         
         <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="text-align: center; margin-bottom: 20px;">
-            <a href="/books/add" class="add-button">+ Tambah Buku Baru</a>
+            <a th:href="@{/books/add}" class="add-button">+ Tambah Buku Baru</a>
         </div>
 
         <table>
@@ -41,7 +41,7 @@
         </table>
 
         <div style="text-align: center; margin-top: 20px;">
-            <a href="/home">Kembali ke Beranda</a>
+            <a th:href="@{/}">Kembali ke Beranda</a>
         </div>
     </div>
 

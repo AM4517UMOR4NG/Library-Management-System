@@ -2,119 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Daftar Anggota</title>
-    <style>
-        /* Tambahkan gaya modern */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .add-member {
-            display: flex;
-            justify-content: flex-end;
-            margin: 15px;
-        }
-
-        .add-member a {
-            text-decoration: none;
-            background: #28a745;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .add-member a:hover {
-            background: #218838;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th, td {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background: #007bff;
-            color: white;
-            text-align: center;
-        }
-
-        tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-
-        tr:hover {
-            background: #f1f1f1;
-        }
-
-        .actions a {
-            margin-right: 10px;
-            text-decoration: none;
-            color: #007bff;
-        }
-
-        .actions a:hover {
-            text-decoration: underline;
-        }
-
-        .actions a.delete {
-            color: #dc3545;
-        }
-
-        .actions a.delete:hover {
-            color: #bd2130;
-        }
-
-        .back-link {
-            display: block;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .back-link a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-        }
-
-        .back-link a:hover {
-            text-decoration: underline;
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/member-list.css}">
 </head>
 <body>
     <h1>Daftar Member</h1>
     <div class="container">
         <!-- Tombol tambah member hanya tampil jika role adalah admin -->
         <div class="add-member" th:if="${#authentication.name == 'admin'}">
-            <a href="/members/add">Tambah Member Baru</a>
+            <a th:href="@{/members/add}">Tambah Member Baru</a>
         </div>
 
         <table>
@@ -144,7 +39,7 @@
             </tbody>
         </table>
         <div class="back-link">
-            <a href="/home">Kembali</a>
+            <a th:href="@{/}">Kembali</a>
         </div>
     </div>
 </body>
